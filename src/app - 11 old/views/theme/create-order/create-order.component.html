@@ -1,0 +1,152 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      Catalogue Product Detailed SKU View
+    </div>
+    <div class="card-body table-responsive">
+<!-- *ngFor="let val of mf.data; -->
+      <div class="row">
+        <div class="col-md-12">
+          <form #editProductForm="ngForm">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Add Order</legend>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">User ID </span>
+                </div>
+                <input type="text" class="form-control" placeholder="User Id" name="user_id" required [(ngModel)]="user_id">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Description</span>
+                </div>
+                <textarea class="form-control" placeholder="Ticket Stage" name="ticket_stage" required [(ngModel)]="ticket_stage"></textarea>
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">SKU Image</span>
+                </div>
+                <input type="text" class="form-control" placeholder="SVG Image"  name="svg_image" required [(ngModel)]="svg_image">
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">JPG Image</span>
+                </div>
+                <input type="text" class="form-control" placeholder="JPG Image"  name="jpg_image" required [(ngModel)]="jpg_image">
+              </div>
+              <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Special Instruction</span>
+                  </div>
+                  <textarea class="form-control"  name="special_instruction" required [(ngModel)]="special_instruction"></textarea>
+                </div>
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Order Specification</legend>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                          <input type="checkbox" [(ngModel)]="design_window_check" name="design_window_check" class="form-control" style="height: 30px;width: 30px;">
+                          <span class="input-group-text">Design Window Reversed</span>
+                      </div>
+                      <!-- <select required [(ngModel)]="action" class="form-control" name="action">
+                        <option value="New Ticket">New Ticket</option>
+                        <option value="Work in Progress">Work in Progress</option>
+                        <option value="Review Required">Review Required</option>
+                        <option value="Further Work Required">Further Work Required</option>
+                        <option value="Complete">Complete</option>
+                      </select> -->
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Color</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Color"  name="color" required [(ngModel)]="color">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Size</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Size"  name="size" required [(ngModel)]="size">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Ebay Used ID</span>
+                      </div>
+                      <input type="number" class="form-control" placeholder="Ebay Used ID"  name="ebay_user_id" required [(ngModel)]="ebay_user_id">
+                  </div>
+                </fieldset>
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Price Calculator</legend>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Selling Price Including Postage</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Selling Price Including Postage"  name="selling_price" required [(ngModel)]="selling_price">
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Material Price </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Material Price "  name="material_price" required [(ngModel)]="material_price">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Packaging Used </span>
+                      </div>
+                      <select required [(ngModel)]="packaging_used" class="form-control" name="packaging_used">
+                          <option value=""></option>
+                      </select>
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Material Height </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Material Height "  name="material_height" required [(ngModel)]="material_height">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Material Width </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Material Width "  name="material_width" required [(ngModel)]="material_width">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Postage Code </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Postage Code "  name="postage_code" required [(ngModel)]="postage_code">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Estimated Ebay </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Estimated Ebay "  name="estimated_ebay" required [(ngModel)]="estimated_ebay">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Gross Profit </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Gross Profit "  name="gross_profit" required [(ngModel)]="gross_profit">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Ebay Message History </span>
+                      </div>
+                      <app-ngx-editor [placeholder]="'Ebay Message History'" [spellcheck]="true" [(ngModel)]="ebay_message_history" name="ebay_message_history" minHeight="130px"></app-ngx-editor>
+                      <!-- <input type="text" class="form-control" placeholder="Ebay Message History  "  name="ebay_message_history" required [(ngModel)]="ebay_message_history"> -->
+                  </div>
+                </fieldset>
+              <!-- <div class="textarea">
+                  <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="pro_description" name="pro_description"></app-ngx-editor>
+              </div> -->
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn btn-primary px-4" (click)="addOrder(user_id,ticket_stage,svg_image,jpg_image,special_instruction,design_window_check,color,size,ebay_user_id,selling_price,material_price,packaging_used,material_height,material_width,postage_cost,estimated_ebay,gross_profit,ebay_message_history)">Save</button>
+                </div>    
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,336 @@
+<div class="animated fadeIn">
+  <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+  <div class="card">
+    <div class="card-header">
+      Catalogue Product Detailed SKU View
+    </div>
+    <div class="card-body table-responsive">
+<!-- *ngFor="let val of mf.data; -->
+    <div class="row">
+      <div class="col-md-12">
+          <a href="#/theme/product" class="btn btn-primary float-right px-4">Back to Full list of products</a>
+      </div>
+    </div>
+<form #editProductForm="ngForm" >
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">SKU Product Data</legend>
+    <!-- <h1>Catalogue Product Detailed SKU View</h1> -->
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">General Data</legend>
+    <div class="row">
+      <div class="col-md-3 input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">SKU</span>
+        </div>
+        <input type="number" class="form-control" placeholder="sku" name="SKU" disabled readonly required [(ngModel)]="sku">
+      </div>
+      <div class="col-md-9 input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Title</span>
+        </div>
+        <input type="text" class="form-control" placeholder="title" maxlength="87" name="title" required [(ngModel)]="title">
+      </div>
+
+      <div class="col-md-12">
+        <div class="img-sec input-group mb-3">
+          <div class="">
+            <img src="http://tritecgraphics.co.uk/productimages/svg/{{ sku }}.svg" alt ="" class="img" /> 
+            <span class="input-group-text">SVG Design</span>  
+          </div>
+        </div>
+        <div class="img-sec input-group mb-3" *ngFor="let val of imgarray;let rowIndex=index">
+          <div class="">
+            <img src="{{ val.src }}" alt ="" class="img" /> 
+            <input type="text" class="form-control" *ngIf="val.show"  placeholder="image{{rowIndex+1}}"  name="image{{rowIndex+1}}" required [(ngModel)]="this['image'+(rowIndex+1)]">
+            <span class="input-group-text" (click)="editImgTitle(val)">image{{ rowIndex+1 }}</span>  
+          </div>
+        </div>
+      <!-- <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image1 }}" alt ="" class="img" />  
+          <input type="text" class="form-control"  *ngIf="hide"  placeholder="image1"  name="image1" required [(ngModel)]="image1">
+          <span class="input-group-text">Image1</span>  
+        </div>
+      </div>
+      <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image2 }}" alt ="" class="img"/>  
+          <input type="text" class="form-control" *ngIf="hide" placeholder="image2"  name="image2" required [(ngModel)]="image2">
+          <span class="input-group-text">Image2</span>  
+        </div>
+      </div>
+      <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image3 }}" alt ="" class="img"/>  
+          <input type="text" class="form-control" *ngIf="hide" placeholder="image3"  name="image3" required [(ngModel)]="image3">
+          <span class="input-group-text">Image3</span>  
+        </div>
+      </div>
+      <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image4 }}" alt ="" class="img"/>
+          <input type="text" class="form-control" *ngIf="hide" placeholder="image4"  name="image4" required [(ngModel)]="image4">
+          <span class="input-group-text">Image4</span>  
+        </div>
+      </div>
+      <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image5 }}" alt ="" class="img"/>  
+          <input type="text" class="form-control" *ngIf="hide" placeholder="image5"  name="image5" required [(ngModel)]="image5">
+          <span class="input-group-text">Image5</span>  
+        </div>
+      </div>
+      <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image6 }}" alt ="" class="img"/>  
+          <input type="text" class="form-control" *ngIf="hide" placeholder="image6"  name="image6" required [(ngModel)]="image6">
+          <span class="input-group-text">Image6</span>  
+        </div>
+      </div>
+      <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image7 }}" alt ="" class="img"/>  
+          <input type="text" class="form-control" *ngIf="hide" placeholder="image7"  name="image7" required [(ngModel)]="image7">
+          <span class="input-group-text" (click)="editImgTitle(result,image7)">Image7</span>  
+        </div>
+      </div> -->
+      </div>
+
+      <div class="col-md-6">
+        <div class="input-group  mb-4">
+          <!-- <span class="input-group-text">eBay Category Id</span> -->
+          <span class="input-group-text">eBay Cat ID</span>  
+          <select  class="form-control" name="eBay_Category_Id" [(ngModel)]="eBay_Category_Id">
+              <!-- <option value="" disabled>ebay category ID</option> -->
+            <option value="{{eBay_Category_Id}}" >{{ eBay_Category_Id }}</option>
+          </select>
+          <!-- <select  class="form-control" name="item_specific_1_name" [(ngModel)]="item_specific_1_name">
+              <option value="Item Specific 1 Name"  >Item Specific 1 Name</option>
+              <option value="{{item_specific_1_namee}}" disabled>{{ item_specific_1_namee }}</option>
+            </select> -->
+        </div>
+        <!-- <input type="text" class="form-control" placeholder="eBay Category Id"  name="eBay_Category_Id" required [(ngModel)]="eBay_Category_Id" readonly disabled> -->
+        <!-- <input type="text" readonly disabled> -->
+
+        <!-- <div class="col-md-12 input-group mb-4"> -->
+            <div class="input-group-prepend  mb-4 ">
+              <span class="input-group-text">Ref ID</span>
+              <input type="text" class="form-control" placeholder="Ref ID"  name="ref_Id" required [(ngModel)]="ref_Id">
+            </div>
+          <!-- </div> -->
+
+        <!-- <div class="col-md-12  input-group mb-4"> -->
+            <div class="input-group-prepend mb-4 ">
+              <span class="input-group-text">Tag</span>
+              <select  class="form-control" name="tag" [(ngModel)]="tag">
+                  <!-- <option value="" disabled>Tag</option> -->
+                <option value="{{tag}}" >{{ tag }}</option>
+              </select>
+
+              <!-- <span class="input-group-text"></span> -->
+            </div>
+            <!-- <input type="text" class="form-control" placeholder="Tag"  name="tag" required [(ngModel)]="tag"> -->
+        <!-- </div> -->
+    </div>
+    <div class="col-md-6">
+        <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Store Category Name</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Store Category Name"  name="store_category_name" required [(ngModel)]="store_category_name">
+        </div>
+        <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text">GMO Brand</span>
+            </div>
+            <input type="text" class="form-control" placeholder="GMO Brand"  name="gmo_brand" required [(ngModel)]="gmo_brand">
+        </div>
+        <div class=" input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text">GMO MPN</span>
+            </div>
+            <input type="text" class="form-control" placeholder="GMO MPN"  name="gmo_mpn" required [(ngModel)]="gmo_mpn">
+        </div>
+        <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text">GMO Category</span>
+            </div>
+            <input type="text" class="form-control" placeholder="GMO Category"  name="gmo_category" required [(ngModel)]="gmo_category">
+        </div>
+    </div>
+    </div>
+  </fieldset>
+   
+   <!-- <div class="img-sec input-group mb-3">
+        <div class="">
+          <img src="{{ image1 }}" alt ="" class="img" />  
+          <input type="text" class="form-control"  *ngIf="hide"  placeholder="image1"  name="image1" required [(ngModel)]="image1">
+          <span class="input-group-text">Image1</span>  
+        </div>
+      </div>
+     <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Image2</span>
+        </div>
+        <input type="text" class="form-control" placeholder="image2"  name="image2" required [(ngModel)]="image2">
+        <div class="">
+            <img src="{{ image2 }}" alt ="" class="img"/>    
+          </div>    
+    </div> -->
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Item Specifics</legend>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group mb-4">
+              <span class="input-group-text">Item Specific 1 Name</span>
+              <select  class="form-control" name="item_specific_1_name" [(ngModel)]="item_specific_1_name">
+                <!-- <option value="" disabled >Item Specific 1 Name</option> -->
+                <option value="{{item_specific_1_name}}" >{{ item_specific_1_name }}</option>
+              </select>
+          </div>
+          <div class="input-group mb-4">
+              <span class="input-group-text">Item Specific 2 Name</span>
+              <select  class="form-control" name="item_specific_2_name" [(ngModel)]="item_specific_2_name" >
+                  <option value="" disabled >Item Specific 2 Name</option>
+                <option value="{{item_specific_2_name}}" >{{ item_specific_2_name }}</option>
+              </select>
+          </div>
+          <div class="input-group mb-4">
+              <span class="input-group-text">Item Specific 3 Name</span>
+              <select  class="form-control" name="item_specific_3_name" [(ngModel)]="item_specific_3_name">
+                  <!-- <option value=""  disabled>Item Specific 3 Name</option> -->
+                <option value="{{item_specific_3_name}}" >{{ item_specific_3_name }}</option>
+              </select>
+          </div>
+          <div class="input-group mb-4">
+              <span class="input-group-text">Item Specific 4 Name</span>
+              <select  class="form-control" name="item_specific_4_name" [(ngModel)]="item_specific_4_name">
+                  <!-- <option value=""  disabled>Item Specific 4 Name</option> -->
+                <option value="{{item_specific_4_name}}">{{ item_specific_4_name }}</option>
+              </select>
+          </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">Item Specific 5 Name</span>
+            <select  class="form-control" name="item_specific_5_name" [(ngModel)]="item_specific_5_name">
+                <!-- <option value=""  disabled>Item Specific 5 Name</option> -->
+              <option value="{{item_specific_5_name}}">{{ item_specific_5_name }}</option>
+            </select>   
+          </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">Item Specific 6 Name</span>
+            <select  class="form-control" name="item_specific_6_name" [(ngModel)]="item_specific_6_name">
+                <!-- <option value=""  disabled>Item Specific 6 Name</option> -->
+              <option value="{{item_specific_6_name}}" disabled>{{ item_specific_6_name }}</option>
+            </select>   
+          </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">Item Specific 7 Name</span>
+            <select  class="form-control" name="item_specific_7_name" [(ngModel)]="item_specific_7_name">
+                <!-- <option value=""  disabled>Item Specific 7 Name</option> -->
+              <option value="{{item_specific_7_name}}">{{ item_specific_7_name }}</option>
+            </select> 
+          </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">Item Specific 8 Name</span>
+            <select  class="form-control" name="item_specific_8_name" [(ngModel)]="item_specific_8_name">
+                <!-- <option value=""  disabled>Item Specific 8 Name</option> -->
+              <option value="{{item_specific_8_name}}">{{ item_specific_8_name }}</option>
+            </select> 
+          </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">Item Specific 9 Name</span>
+            <select  class="form-control" name="item_specific_9_name" [(ngModel)]="item_specific_9_name">
+                <!-- <option value=""  disabled>Item Specific 9 Name</option> -->
+              <option value="{{item_specific_9_name}}">{{ item_specific_9_name }}</option>
+            </select> 
+          </div>
+          <!-- <div class="col-md-12  input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Item Specific 9 Name</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 9 Name"  name="item_specific_9_name" required [(ngModel)]="item_specific_9_name">
+          </div> -->
+        </div>
+        <div class="col-md-6 input-group ">
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Item Specific 1 Value</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Item Specific 1 Value"  name="item_specific_1_value" required [(ngModel)]="item_specific_1_value">
+          </div>
+          <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 2 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 2 Value"  name="item_specific_2_value" required [(ngModel)]="item_specific_2_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 3 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 3 Value"  name="item_specific_3_value" required [(ngModel)]="item_specific_3_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 4 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 4 Value"  name="item_specific_4_value" required [(ngModel)]="item_specific_4_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 5 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 5 Value"  name="item_specific_5_value" required [(ngModel)]="item_specific_5_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 6 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 6 Value"  name="item_specific_6_value" required [(ngModel)]="item_specific_6_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 7 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 7 Value"  name="item_specific_7_value" required [(ngModel)]="item_specific_7_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 8 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 8 Value"  name="item_specific_8_value" required [(ngModel)]="item_specific_8_value">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Item Specific 9 Value</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Item Specific 9 Value"  name="item_specific_9_value" required [(ngModel)]="item_specific_9_value">
+            </div>
+        </div>
+      
+        <div class="col-md-12 textarea mb-3">
+            <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="description" name="description"></app-ngx-editor>
+        </div>
+        <div class="col-md-12 mb-3">
+            <button type="button" class="btn btn-default float-right px-4">Preview Descrption in browser</button>
+        </div>
+        <div class="col-md-12 mb-3">
+          <button type="submit" class="btn clr text-white float-right px-4" (click)="updateProduct(id,sku,title,image1,image2,image3,image4,image5,image6,image7,eBay_Category_Id,ref_Id,item_specific_1_name,item_specific_2_name,item_specific_3_name,item_specific_4_name,item_specific_5_name,item_specific_6_name,item_specific_7_name,item_specific_8_name,item_specific_9_name,store_category_name,gmo_brand,gmo_mpn,gmo_category,item_specific_1_value,item_specific_2_value,item_specific_3_value,item_specific_4_value,item_specific_5_value,item_specific_6_value,item_specific_7_value,item_specific_8_value,item_specific_9_value,description)">Update</button>
+        </div>
+        <div class="col-md-12 mb-3">
+          <a href="#/theme/product" class="btn clr text-white float-right px-4">Back to Full List of products </a>
+        </div>
+      </div>
+    </fieldset>
+    
+    
+    <!-- <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Ref Type</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Ref Type"  name="Ref_Type" required [(ngModel)]="ref_Type">
+    </div> -->
+  </fieldset>
+</form>
+  </div>
+  </div>

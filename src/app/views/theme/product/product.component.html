@@ -1,0 +1,77 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      Catalogue Product
+    </div>
+    <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+    <div class="card-body table-responsive">
+      <!-- <div class="col-md-12">
+        <input type="text" id="search" placeholder="search"  name="Title"/> 
+      </div> -->
+      <!-- <app-table></app-table> -->
+      <!--<table class="table text-center" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th><mfDefaultSorter by="SKU">SKU</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Title">Title</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Store_category_name">Store Category Name</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Tag">Tag</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Bin_price">Bin Price</mfDefaultSorter></th>
+             <th></th>
+            <th>Store Category Name</th>
+            <th>Tag</th>
+            <th>Bin Price</th>
+            <th>QTY</th>
+            <th>Ref ID</th>
+            <th>Ref Type</th> -->
+            <!-- <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let val of mf.data;let rowIndex=index">
+            <td><p> {{rowIndex+1}}</p></td>
+            <td><p> {{val.SKU}} </p></td>
+            <td><p><a (click)="editProduct(val.table_id)" class="btn btn-block btn-link" style="text-decoration:underline;color:blue"> {{val.Title}} </a></p></td>
+            <!-- <td><p><img src="{{val.Image1}}" alt="image1" class="img" (click)="open(val.Image1)"/></p></td>
+            <td><p><img src="{{val.Image2}}" alt="image2" class="img" (click)="open(val.Image2)"/></p></td>
+            <td><p> {{val.Store_category_name}} </p></td>
+            <td><p> {{val.Tag}} </p></td>
+            <td><p> {{val.Bin_price}} </p></td> 
+            <!--<td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td class="text-right">{{user.age}}</td>
+            <td>{{user.city | uppercase}}</td
+          </tr>          
+        </tbody>
+        <tfoot>
+          <tr>
+              <td colspan="4" >
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+              </td>
+          </tr>
+          </tfoot>
+      </table>>-->
+
+
+      <div class="col-lg-12 text-center">
+          <ng2-smart-table 
+          [settings]="settings" 
+          [source]="source"
+          >
+          </ng2-smart-table>
+        <!-- <ul class="pagination" *ngFor="let pageKey of pagination;let index" >
+          <li><a href="#">{{rowIndex+1}}</a></li>
+        </ul> -->
+      </div>
+      <div class="col-xl-2 col-md-12 col-sm-4 col-6 mb-4">
+          <button type="button" class="btn btn-brand btn-facebook mr-1" style="margin-bottom: 4px" (click) = "productCsv()" >
+              <i class="fa fa-download"></i>
+              <span>Download Product Data </span>
+              <!-- <h6>Select File</h6> -->
+          </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,39 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      Sales History
+    </div>
+    <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+    <div class="card-body table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ItemNumber</th>
+            <th>SKU</th>
+            <th>Title</th>
+            <th>Sold</th>
+            <th>Watchers</th>
+            <th>Viewers</th>
+            <th>Tag</th>
+            <th>Image1</th>
+            <!-- <th>Updated</th> -->
+          </tr>
+        </thead>
+        <tbody class="soldProduct">
+          <tr *ngFor="let val of soldProduct">
+            <td><p> {{val.Id}} </p></td>
+            <td><p><a (click)="editSale(val.Id)" class="btn btn-block btn-link" style="text-decoration:underline;color:blue"> {{val.Item_number}} </a></p></td>
+            <td><p> {{val.SKU}} </p></td>
+            <td><p> {{val.Title}} </p></td>
+            <td><p> {{val.Sold}} </p></td>
+            <td><p> {{val.Watcher}} </p></td>
+            <td><p> {{val.Viewer}} </p></td>
+            <td><p> {{val.Tag}} </p></td>
+            <td><p> <img src="{{val.proImage1}}" alt="image1" class="img"/> </p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

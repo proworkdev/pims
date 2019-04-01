@@ -1,0 +1,19 @@
+.img{
+    height:100px;width: 100px;
+}
+// .card-body table.table {
+//     height: 400px;
+//     overflow-y: scroll;
+//     display: block;
+// }
+.hide-action td.ng2-smart-actions a {
+    display: none;
+}
+input.form-control.ng-untouched.ng-pristine.ng-valid {
+    text-align: center;
+}
+
+
+:host /deep/ ng2-smart-table-pager  { 
+    float:right;
+}

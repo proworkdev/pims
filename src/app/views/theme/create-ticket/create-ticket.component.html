@@ -1,0 +1,77 @@
+<div class="animated fadeIn">
+    <div class="card">
+      <div class="card-header">
+        Ticket Manager
+      </div>
+      <div class="card-body table-responsive">
+  <!-- *ngFor="let val of mf.data; -->
+        <!-- <div class="row"> -->
+          <!-- <div class="col-md-12"> -->
+            
+              <form #editProductForm="ngForm">
+                <!-- <h1>Ticket Manager</h1> -->
+                <!-- <p class="text-muted">Add Ticket</p> -->
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Add Ticket</legend>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Title</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Title" name="title" required [(ngModel)]="title">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Description</span>
+                    </div>
+                    <textarea class="form-control" placeholder="Description" name="description" required [(ngModel)]="description"></textarea>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">SKU</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="SKU"  name="sku" required [(ngModel)]="sku">
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Assigned User</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Assigned User"  name="assigned_user" required [(ngModel)]="assigned_user">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Ticket Status</span>
+                      </div>
+                      <select required [(ngModel)]="action" class="form-control" name="action">
+                        <option value="New Ticket" selected>New Ticket</option>
+                        <option value="Work in Progress">Work in Progress</option>
+                        <option value="Review Required">Review Required</option>
+                        <option value="Further Work Required">Further Work Required</option>
+                        <option value="Complete">Complete</option>
+                      </select>
+                  </div>
+                  <!-- <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Status</span>
+                      </div>
+                      <select required [(ngModel)]="status" class="form-control" name="status" >
+                        <option value="Open">Open</option>
+                        <option value="Closed">Closed</option>
+                      </select>
+                  </div> -->
+                  <!-- <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Type</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Type"  name="type" required [(ngModel)]="type">
+                  </div> -->
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn px-4 clr text-white" (click)="addTicket(title,assigned_user,action,description,sku)">Save</button>
+                    </div>    
+                  </div>
+                </fieldset>
+              </form>
+        
+      </div>
+    </div>
+</div>

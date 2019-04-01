@@ -1,0 +1,68 @@
+<form #editProductForm="ngForm">
+  <h1>Edit Sale</h1>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Item Number</span>
+    </div>
+    <input type="number" class="form-control" placeholder="Item Number" name="itemNumber" required [(ngModel)]="itemNumber">
+  </div>
+  <div class="input-group mb-4">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Type</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Type"  name="type" required [(ngModel)]="type">
+  </div>
+  <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Image1</span>
+      </div>
+      <input type="text" class="form-control" placeholder="image1"  name="image1" required [(ngModel)]="image1">
+      <div class="">
+        <img src="{{ image1 }}" alt ="" class="img"/>    
+      </div>
+  </div>
+  
+  <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">SKU</span>
+      </div>
+      <input type="text" class="form-control" placeholder="SKU"  name="sku" required [(ngModel)]="sku" readonly disabled>
+  </div>
+  <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Title</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Title"  name="title" required [(ngModel)]="title">
+  </div>
+  <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Sold</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Sold"  name="sold" required [(ngModel)]="sold">
+  </div>
+  <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Watchers</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Watchers"  name="watchers" required [(ngModel)]="watchers">
+  </div>
+  <div class="input-group mb-4">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Viewers</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Viewers"  name="viewers" required [(ngModel)]="viewers">
+  </div>
+  <div class="input-group mb-4">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Tag</span>
+    </div>
+    <input type="text" class="form-control" placeholder="tag"  name="tag" required [(ngModel)]="tag">
+  </div>
+  
+  <div class="row">
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary px-4" (click)="updateSale(id,itemNumber,type,image1,sku,title,sold,watchers,viewers,tag)">Update</button>
+    </div>
+  
+  </div>
+</form>

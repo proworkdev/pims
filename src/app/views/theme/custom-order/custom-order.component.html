@@ -1,0 +1,372 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="ticket-info col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-blue"><i class="fa-check-circle-o text-white"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Total Tickets</span>
+          <span class="info-box-number">{{ totalTask }}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+    </div>
+    <div class="ticket-info col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-red"><i class="fa fa-envelope text-white"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">New Tickets</span>
+          <span class="info-box-number">{{ newTask }}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <div class="ticket-info col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-check text-white"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Completed Tickets</span>
+          <span class="info-box-number">{{ completeTask }}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Catalogue Product
+    </div>
+    <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+    <div class="card-body table-responsive">
+      <!-- <div class="col-md-12">
+        <input type="text" id="search" placeholder="search"  name="Title"/> 
+      </div> -->
+      <!-- <app-table></app-table> -->
+      <!--<table class="table text-center" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th><mfDefaultSorter by="SKU">SKU</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Title">Title</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Store_category_name">Store Category Name</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Tag">Tag</mfDefaultSorter></th>
+            <th><mfDefaultSorter by="Bin_price">Bin Price</mfDefaultSorter></th>
+              <th></th>
+            <th>Store Category Name</th>
+            <th>Tag</th>
+            <th>Bin Price</th>
+            <th>QTY</th>
+            <th>Ref ID</th>
+            <th>Ref Type</th> -->
+            <!-- <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let val of mf.data;let rowIndex=index">
+            <td><p> {{rowIndex+1}}</p></td>
+            <td><p> {{val.SKU}} </p></td>
+            <td><p><a (click)="editProduct(val.table_id)" class="btn btn-block btn-link" style="text-decoration:underline;color:blue"> {{val.Title}} </a></p></td>
+            <td><p><img src="{{val.Image1}}" alt="image1" class="img" (click)="open(val.Image1)"/></p></td>
+            <td><p><img src="{{val.Image2}}" alt="image2" class="img" (click)="open(val.Image2)"/></p></td>
+            <td><p> {{val.Store_category_name}} </p></td>
+            <td><p> {{val.Tag}} </p></td>
+            <td><p> {{val.Bin_price}} </p></td> 
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td class="text-right">{{user.age}}</td>
+            <td>{{user.city | uppercase}}</td
+          </tr>          
+        </tbody>
+        <tfoot>
+          <tr>
+              <td colspan="4" >
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+              </td>
+          </tr>
+          </tfoot>
+      </table>>-->
+      <div class="row">
+        <div class="col-lg-12 text-center" id="scrollup">
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Custom Order</legend>
+              <ng2-smart-table class="table-data"
+              [settings]="settings" 
+              [source]="order" (deleteConfirm)="onDeleteConfirm($event)" >
+              </ng2-smart-table>
+            <!-- <ul class="pagination" *ngFor="let pageKey of pagination;let index" >
+              <li><a href="#">{{rowIndex+1}}</a></li>
+            </ul> -->
+            
+          <div class="col-xl-2 col-md-12 col-sm-4 col-lg-12 mb-4">
+              <!-- <a  href="/dist/#/theme/createcustomorder"class="btn btn-brand btn-facebook mr-1" > -->
+              <a (click) = "clearOrer()" class="btn btn-brand btn-facebook mr-1 text-white" >
+                  <span>Add Custom Order </span>
+              </a>
+          </div>
+          </fieldset>
+        </div> 
+        <div class="col-lg-12 mb-4">
+            <a class="btn btn-brand btn-facebook mr-1 float-right" href="">
+                <span>Print Selected Order </span>
+            </a>
+        </div>
+
+        <!-- <div class="col-md-12" *ngIf="hide"> -->
+        <div class="col-md-12" id="scrolldown" *ngIf="hide">
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Custom Job ID {{ id }}</legend>
+            <div class="row">
+              <div class="col-md-6">
+                <!-- <div class="img-sec input-group mb-3">
+                  <img src="https://www.tritecgraphics.co.uk/productimages/image3/fitting.jpg" alt ="" class="img" /> 
+                  <span class="input-group-text" (click)="svg_image(val)">image</span>  
+                  <input type="text" class="form-control" placeholder="svg_image"  name="svg_image" required [(ngModel)]="svg_image"> -->
+                <!-- </div> --> 
+                <!-- <div class="img-sec input-group mb-3" *ngFor="let val of imgarray;">
+                  <div class="custom-order-text text-center">
+                    <span class="input-group-text"> {{ val.title }} </span>
+                    <img alt="" class="img" src="{{ val.src }}"/>
+                    <input type="text" class="form-control" *ngIf="val.show"  placeholder="SVG Image"  name="svg_file" value={{val.src}} required [(ngModel)]="val.src">
+                    <button class="btn btn-primary px-4" (click)="editImgTitle(val)">Update</button>
+                  </div>
+                </div> -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Special Instruction</span>
+                  </div>
+                  <textarea class="form-control"  name="instructions" required [(ngModel)]="instructions">{{ instructions }}</textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <!-- <div class="input-group mb-4">
+                      <div class="input-group-prepend instruction_area">
+                          <span class="input-group-text">Special Instruction</span>
+                        </div>
+                        <textarea rows="7" class="instruction" name="instructions"  [(ngModel)]="instructions" >{{ instructions }}</textarea>
+                        
+                      </div> -->
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Job Status</span>
+                          </div>
+                          <select required [(ngModel)]="ticket_stage" class="form-control" name="ticket_stage">
+                            <option value="New Job">New Job</option>
+                            <option value="Preparing job design files now">Preparing job design files now</option>
+                            <option value="Ready to check payment and cut Paul">Ready to check payment and cut Paul</option>
+                            <option value="Closed order complete & posted">Closed order complete & posted</option>
+
+                            <!-- <option value="Work in progress">Work in progress</option>
+                            <option value="Review Required">Review Required</option>
+                            <option value="Further Work Required">Further Work Required</option>
+                            <option value="Ready for Production">Ready for Production</option>
+                            <option value="Production Complete">Production Complete </option> -->
+                        </select>
+                          <!-- <textarea class="form-control" placeholder="Ticket Stage" name="ticket_stage" required [(ngModel)]="ticket_stage" height="101px">{{ ticket_stage }}</textarea> -->
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Ebay User ID</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Ebay Used ID"  name="ebay_user_id" required [(ngModel)]="ebay_user_id" value= "{{ ebay_user_id }}">
+                      </div>
+                      
+                      <!-- <div class="input-group mb-4" *ngIf = "saveBtn">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">User ID </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="User Id"  name="user_id" required [(ngModel)]="user_id">
+                      </div> -->
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Ebay Message History and Instructions </span>
+                  </div>
+                  <app-ngx-editor [placeholder]="'Ebay Message History and Instructions'" [spellcheck]="true" [(ngModel)]="ebay_msg_history"  name="ebay_msg_history" minHeight="150px">
+                    {{ ebay_msg_history }}</app-ngx-editor>
+                    <!-- <input type="text" class="form-control" placeholder="Ebay Message History  "  name="ebay_message_history" required [(ngModel)]="ebay_message_history"> -->
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Selling Price Including Postage</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Selling Price Including Postage"  name="selling_price" required [(ngModel)]="selling_price" value= "{{ selling_price }}" >
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <input type="checkbox" [(ngModel)]="design_window_check" name="design_window_check" value="{{ design_window_check }}" class="form-control" style="width: 19px;margin-right:18px;">
+                        <span class="input-group-text">Design Window Reversed</span>
+                    </div>
+                </div>
+                <!-- <div class="img-sec input-group mb-3">
+                  <div class="custom-order-text text-center">
+                    <span class="input-group-text">SVG Preview File</span>
+                    <img alt="" class="img" src="{{ svg_file }}"/>
+                    <input type="text" class="form-control" *ngIf="view_svg_image" placeholder="SVG Image"  name="svg_file" required [(ngModel)]="svg_file">
+                    <button class="btn clr px-4 text-white" (click)="showLabelsvg()">Update</button>
+                  </div>
+                </div>
+                <div class="img-sec input-group mb-3">
+                  <div class="custom-order-text text-center">
+                    <span class="input-group-text">JPG Preview File</span>
+                    <img alt="" class="img" src="{{ jpg_file }}"/>
+                    <input type="text" class="form-control" *ngIf="view_jpg_image" placeholder="JPG Image"  name="jpg_file" required [(ngModel)]="jpg_file">
+                    <button class="btn clr px-4 text-white" (click)="showLabeljpg()">Update</button>
+                  </div>
+                </div>  -->
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-md-6">
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Order Specification</legend>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Color</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Color" name="color" value= "{{ design_window_color }}" [(ngModel)]="design_window_color">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Size</span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Size"  name="size" required [(ngModel)]="design_window_size" value= "{{ design_window_size }}">
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-6">
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Price Calculator</legend>
+                  
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Material Price </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Material Price "  name="material_price" required [(ngModel)]="material_price" value= "{{ material_price }}">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Packaging Used </span>
+                      </div>
+                      <select required class="form-control" name="packaging_used"  [(ngModel)]="packaging_used">
+                          <option value="Envelope">Envelope</option>
+                          <option value="Tube">Tube</option>
+                      </select>
+          
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Material Height </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Material Height "  name="material_height" required [(ngModel)]="material_height" value= "{{ material_height }}">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Material Width </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Material Width "  name="material_width" required [(ngModel)]="material_width" value= "{{ material_width }}">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Postage Code </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Postage Cost "  name="postage_cost" required [(ngModel)]="postage_cost" value= "{{ postage_cost }}" >
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Estimated Ebay </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Estimated Ebay "  name="estimated_ebay" required [(ngModel)]="estimated_ebay" value= "{{ estimated_ebay }}">
+                  </div>
+                  <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Gross Profit </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Gross Profit "  name="gross_profit" required [(ngModel)]="gross_profit" value= "{{ gross_profit }}">
+                  </div>
+                  
+                </fieldset>
+              </div> -->
+              <div class="col-md-12 mb-3">
+                <button type="submit" class="btn clr float-right px-4 text-white" *ngIf = "saveBtn" (click)="updateorder(id,svg_file,jpg_file,packaging_used,instructions,design_window_check,design_window_color,design_window_size,ebay_msg_history,ebay_user_id,estimated_ebay,gross_profit,material_height,material_price,material_width,postage_cost,selling_price,ticket_stage)">Update</button>
+                <button type="submit" class="btn clr float-right px-4 text-white" *ngIf = "!saveBtn" (click)="addOrder(ticket_stage,svg_file,jpg_file,instructions,design_window_check,design_window_color,design_window_size,ebay_user_id,selling_price,material_price,packaging_used,material_height,material_width,postage_cost,estimated_ebay,gross_profit,ebay_msg_history)">Save</button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  
+<!-- <form #editProductForm="ngForm">
+    <h1>Ticket Manager</h1>
+    <p class="text-muted">Add Ticket</p>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Title</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Title" name="title" required [(ngModel)]="title">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Description</span>
+      </div>
+      <textarea class="form-control" placeholder="Description" name="description" required [(ngModel)]="description"></textarea>
+    </div>
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">SKU</span>
+      </div>
+      <input type="number" class="form-control" placeholder="SKU"  name="sku" required [(ngModel)]="sku">
+    </div>
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Assigned User</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Assigned User"  name="assigned_user" required [(ngModel)]="assigned_user">
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Action</span>
+        </div>
+        <select required [(ngModel)]="action" class="form-control" name="action">
+          <option value="New Ticket">New Ticket</option>
+          <option value="Work in Progress">Work in Progress</option>
+          <option value="Review Required">Review Required</option>
+          <option value="Further Work Required">Further Work Required</option>
+          <option value="Complete">Complete</option>
+        </select>
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Status</span>
+        </div>
+        <select required [(ngModel)]="status" class="form-control" name="status" >
+          <option value="Open">Open</option>
+          <option value="Closed">Closed</option>
+        </select>
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Type</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Type"  name="type" required [(ngModel)]="type">
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <button type="submit" class="btn btn-primary px-4" (click)="addTicket(title,assigned_user,action,status,description,sku,type)">Update</button>
+      </div>    
+    </div>
+  </form>
+ -->

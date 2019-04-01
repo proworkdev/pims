@@ -1,0 +1,545 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="">
+      <div class="ticket-info col-md-4">
+        <div class="info-box">
+          <span class="info-box-icon bg-red"><i class="fa fa-envelope text-white"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">New Tickets</span>
+            <span class="info-box-number">{{ newTickets }}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+        <div class="ticket-info col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-primary"><i class="fa fa-thumbs-up text-white"></i></span>
+  
+            <div class="info-box-content">
+              <span class="info-box-text">Work in Progress </span>
+              <span class="info-box-number">{{ inProgressTickets }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="ticket-info col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa-check-circle-o text-white"></i></span>
+  
+            <div class="info-box-content">
+              <span class="info-box-text">Review Required</span>
+              <span class="info-box-number">{{ reviewRequired }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+  
+        <!-- fix for small devices only
+        <div class="clearfix visible-sm-block"></div> -->
+  
+        <div class="ticket-info col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-long-arrow-right text-white"></i></span>
+  
+            <div class="info-box-content">
+              <span class="info-box-text">Further Work Req.</span>
+              <span class="info-box-number">{{ fWRequired }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="ticket-info col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-check text-white"></i></span>
+  
+            <div class="info-box-content">
+              <span class="info-box-text">Complete</span>
+              <span class="info-box-number">{{ complete }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+     
+  </div>
+
+  <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+  <div class="card">
+    <div class="card-header">
+        Task Manager
+    </div>
+    <div class="card-body">
+      <fieldset class="scheduler-border">
+        <legend class="scheduler-border">Task List</legend>
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th>Task ID</th>
+              <th>SKU</th>
+              <!-- <th>Image1</th> -->
+              <th>Task Title</th>
+              <th>Ticket Status</th>
+              <th>Assigned User</th>
+              <!-- <th>Status</th> -->
+              <th>Created Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="task">
+            <tr *ngFor="let val of task">
+              <td><p> {{val.TaskID}} </p></td>
+              <td><p> {{val.SKU}}  </p></td>
+              <!-- <td><p><img src="https://www.tritecgraphics.co.uk/plaques/image1/235_1.jpg" class="img" (click)="open('https://www.tritecgraphics.co.uk/plaques/image1/235_1.jpg')"/> </p></td> -->
+              <td><p><a (click)="showModal(val.TaskID,val.SKU)" class="btn btn-block btn-link" style="text-decoration:underline;color:blue">  {{val.Title}} </a></p></td>
+              <td><p> {{val.Action}} </p></td>
+              <td><p> {{val.Assigned_user}} </p></td>
+              
+              <!-- <td>
+                <p [ngClass]="(val.Status=='Open')?'badge-info':'badge-success'" class="badge " > {{val.Status}} </p>
+              </td> -->
+              <td><p> {{val.Date_added}} </p></td>
+              <td><button (click)="delete(val.TaskID)" class="btn btn-danger"><span class="fa fa-trash"></span></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+            <div class="col-xl-2 col-md-3 col-sm-4 col-6 mb-4">
+                <!-- <a href="/dist/#/theme/createticket/"> -->
+                <a (click)="clearTicket()"  >
+                  <button type="button" class="btn btn-brand btn-facebook mr-1" style="margin-bottom: 4px" >
+                    <i class="fa fa-pencil"></i>
+                    <span>Add Task</span>
+                  </button>
+                </a>
+            </div>
+        </div>
+      
+      </fieldset>
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <ul class="pagination" *ngFor="let ticketval of totalTickets">
+            <li><a href="#" (click)="">{{totalTickets.ticketval}}</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="row" *ngIf="hide">  
+        <!-- <div class="col-md-6">
+          <ul *ngFor="let value of ticket">
+            <li>Id:  {{value.TaskID}}</li>
+            <li>sku: {{value.SKU}}</li>
+          </ul>
+
+        </div> -->
+
+        <div ngx-auto-scroll lock-y-offset="10" observe-attributes>
+          <div *ngFor="let message of messages">{{ message }}</div>
+        </div>
+
+        <div class="col-md-12" id= "scroll">
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Task Detail Record {{ id }}</legend>
+            <div class="row"> 
+                
+                  <div class="col-md-12 text-editor">
+                    <fieldset class="scheduler-border">
+                      <legend class="scheduler-border">About this task</legend>
+                      <div class="input-group mb-3">
+                        <!-- <div class="input-group-prepend">
+                          <span class="input-group-text">Description</span>
+                        </div> -->
+                        <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="description" name="description" minHeight="78px" maxHeight="101px" overflowX="scroll" overflowY="hidden"></app-ngx-editor>
+                        <!-- <textarea class="form-control" placeholder="Description" name="description" required [(ngModel)]="description"></textarea> -->
+                      </div>
+                    
+                  
+                    <!-- <fieldset class="scheduler-border">
+                      <legend class="scheduler-border"></legend> -->
+                      <form #editProductForm="ngForm">
+                        <!-- <h1>Update Ticket</h1> -->
+                        <!-- <p class="text-muted">Add Ticket</p> -->
+                        <div class="row">
+                          <div class="input-group col-md-6 mb-3" *ngIf="!saveBtn">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Task ID</span>
+                              </div>
+                              <input type="text" class="form-control"   placeholder="Task Record ID"  name="id" required [(ngModel)]="id">
+                          </div>
+
+                          <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">SKU</span>
+                            </div>
+                            <input type="number" class="form-control" min="1" placeholder="SKU"  name="sku" required [(ngModel)]="sku" (keyup)="fetchProductById(sku)">
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="input-group col-md-6 mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Task Title</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Title" name="title" required [(ngModel)]="title">
+                          </div>
+                          <div class="input-group col-md-6 mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Ticket Status</span>
+                              </div>
+                              <select required [(ngModel)]="action" class="form-control" name="action">
+                                <option value="New Ticket">New Ticket</option>
+                                <option value="Work in Progress">Work in Progress</option>
+                                <option value="Review Required">Review Required</option>
+                                <option value="Further Work Required">Further Work Required</option>
+                                <option value="Complete">Complete</option>
+                              </select>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="input-group col-md-6 mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Assigned User</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Assigned User"  name="assigned_user" required [(ngModel)]="assigned_user">
+                          </div>
+                        </div>
+                        
+                        
+                        <!-- <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Status</span>
+                            </div>
+                            <select required [(ngModel)]="status" class="form-control" name="status" >
+                              <option value="Open">Open</option>
+                              <option value="Closed">Closed</option>
+                            </select>
+                        </div> -->
+                        <!-- <div class="col--md-12">
+                          <button type="submit" class="btn btn-primary px-4" (click)="updateTicket(id,title,assigned_user,action,status,description,sku)">Update</button>
+                        </div>  -->
+                      </form>
+                    <!-- </fieldset> -->
+                  </fieldset>
+                  </div>
+                
+                <div class="col-md-12" >
+                  <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">SKU Product Data</legend>
+                    <form #editProductForm="ngForm">
+                      <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">General Data</legend>
+                        <div class="row">
+                          <div class="col-md-3 input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">SKU</span>
+                            </div>
+                            <input type="text"  class="form-control" placeholder="SKU" name="SKU" required [(ngModel)]="sku" [readonly]="!readonlyAttr">
+                          </div>
+                          <div class="col-md-9 input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Title</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Title" maxlength="87" name="proTitle" required [(ngModel)]="proTitle" >
+                          </div>
+                          <div class="col-md-12">
+                              <div class="img-sec input-group mb-3">
+                                <div class="">
+                                  <img src="http://tritecgraphics.co.uk/productimages/svg/{{ sku }}.svg" alt ="" class="img" /> 
+                                  <span class="input-group-text">SVG Design</span>  
+                                </div>
+                              </div>
+                              <div class="img-sec input-group mb-3" *ngFor="let val of imgarray;let rowIndex=index" >
+                                <div class="">
+                                  <img src="{{ val.src }}" alt ="" class="img" /> 
+                                  <input type="text" class="form-control"  *ngIf="val.show"  placeholder="Image{{rowIndex+1}}"  name="pro_image1{{rowIndex+1}}" required [(ngModel)]="this['pro_image'+(rowIndex+1)]" >
+                                  <span class="input-group-text" (click)="editImgTitle(val)">image{{ rowIndex+1 }}</span>  
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group  mb-4">
+                                  <span class="input-group-text">eBay Category Id</span>
+                                  <select  class="form-control" name="pro_eBay_Category_Id" [(ngModel)]="pro_eBay_Category_Id" >
+                                      <!-- <option value="" disabled>ebay category ID</option> -->
+                                    <option value="{{pro_eBay_Category_Id}}" >{{ pro_eBay_Category_Id }}</option>
+                                  </select>
+                                  <!-- <select  class="form-control" name="item_specific_1_name" [(ngModel)]="item_specific_1_name">
+                                      <option value="Item Specific 1 Name"  >Item Specific 1 Name</option>
+                                      <option value="{{item_specific_1_namee}}" disabled>{{ item_specific_1_namee }}</option>
+                                    </select> -->
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="eBay Category Id"  name="eBay_Category_Id" required [(ngModel)]="eBay_Category_Id" readonly disabled> -->
+                                <!-- <input type="text" readonly disabled> -->
+                      
+                                <!-- <div class="col-md-12 input-group mb-4"> -->
+                                    <div class="input-group-prepend  mb-4 ">
+                                      <span class="input-group-text">Ref ID (EAN)</span>
+                                      <input type="text" class="form-control" placeholder="Ref ID"  name="pro_Ref_Id" required [(ngModel)]="pro_Ref_Id" >
+                                    </div>
+                                  <!-- </div> -->
+                      
+                                <!-- <div class="col-md-12  input-group mb-4"> -->
+                                    <div class="input-group-prepend mb-4 ">
+                                      <span  class="input-group-text">Tag</span>
+                                      <select  class="form-control" name="pro_tag" [(ngModel)]="pro_tag" >
+                                          <!-- <option value="" disabled>Tag</option> -->
+                                        <option value="{{pro_tag}}" >{{ pro_tag }}</option>
+                                      </select>
+                      
+                                      <!-- <span class="input-group-text"></span> -->
+                                    </div>
+                                    <!-- <input type="text" class="form-control" placeholder="Tag"  name="tag" required [(ngModel)]="tag"> -->
+                                <!-- </div> -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12  input-group mb-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">Store Category Name</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Store Category Name"  name="pro_store_category_name" required [(ngModel)]="pro_store_category_name" >
+                                </div>
+                                <div class="col-md-12  input-group mb-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">GMO Brand</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="GMO Brand"  name="pro_gmo_brand" required [(ngModel)]="pro_gmo_brand" >
+                                </div>
+                                <div class="col-md-12  input-group mb-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">GMO MPN</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="GMO MPN"  name="pro_gmo_mpn" required [(ngModel)]="pro_gmo_mpn" >
+                                </div>
+                                <div class="col-md-12  input-group mb-4">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">GMO Category</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="GMO Category"  name="pro_gmo_category" required [(ngModel)]="pro_gmo_category" >
+                                </div>
+                            </div>
+                        </div>
+                      </fieldset>
+                      
+                          <!-- <div class="col-md-3 input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">SKU</span>
+                              </div>
+                              <input type="number" class="form-control" placeholder="sku" name="SKU" disabled readonly required [(ngModel)]="sku">
+                            </div>
+                            <div class="col-md-9 input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Title</span>
+                              </div>
+                              <input type="text" class="form-control" placeholder="title" maxlength="87" name="title" required [(ngModel)]="title">
+                            </div> -->
+
+                      <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Item Specifics</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                              <div class="input-group mb-4">
+                                 <span class="input-group-text">Item Specific 1 Name</span>
+                                  <select  class="form-control" name="pro_item_specific_1_name" [(ngModel)]="pro_item_specific_1_name" >
+                                    <!-- <option value="" disabled >Item Specific 1 Name</option> -->
+                                    <option value="{{pro_item_specific_1_name}}"  >{{ pro_item_specific_1_name }}</option>
+                                  </select>
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 2 Name</span>
+                                  <select  class="form-control" name="pro_item_specific_2_name" [(ngModel)]="pro_item_specific_2_name">
+                                      <!-- <option value="" disabled >Item Specific 2 Name</option> -->
+                                    <option value="{{pro_item_specific_2_name}}" >{{ pro_item_specific_2_name }}</option>
+                                  </select>
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 3 Name</span>
+                                  <select  class="form-control" name="pro_item_specific_3_name" [(ngModel)]="pro_item_specific_3_name">
+                                      <!-- <option value=""  disabled>Item Specific 3 Name</option> -->
+                                    <option value="{{pro_item_specific_3_name}}" >{{ pro_item_specific_3_name }}</option>
+                                  </select>
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 4 Name</span>
+                                  <select  class="form-control" name="pro_item_specific_4_name" [(ngModel)]="pro_item_specific_4_name">
+                                      <!-- <option value=""  disabled>Item Specific 4 Name</option> -->
+                                    <option value="{{pro_item_specific_4_name}}">{{ pro_item_specific_4_name }}</option>
+                                  </select>
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 5 Name</span>
+                                <select  class="form-control" name="pro_item_specific_5_name" [(ngModel)]="pro_item_specific_5_name">
+                                    <!-- <option value=""  disabled>Item Specific 5 Name</option> -->
+                                  <option value="{{pro_item_specific_5_name}}">{{ pro_item_specific_5_name }}</option>
+                                </select>   
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 6 Name</span>
+                                <select  class="form-control" name="pro_item_specific_6_name" [(ngModel)]="pro_item_specific_6_name">
+                                    <!-- <option value=""  disabled>Item Specific 6 Name</option> -->
+                                  <option value="{{pro_item_specific_6_name}}" disabled>{{ pro_item_specific_6_name }}</option>
+                                </select>   
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 7 Name</span>
+                                <select  class="form-control" name="pro_item_specific_7_name" [(ngModel)]="pro_item_specific_7_name">
+                                    <!-- <option value=""  disabled>Item Specific 7 Name</option> -->
+                                  <option value="{{pro_item_specific_7_name}}">{{ pro_item_specific_7_name }}</option>
+                                </select> 
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 8 Name</span>
+                                <select  class="form-control" name="pro_item_specific_8_name" [(ngModel)]="pro_item_specific_8_name">
+                                    <!-- <option value=""  disabled>Item Specific 8 Name</option> -->
+                                  <option value="{{pro_item_specific_8_name}}">{{ pro_item_specific_8_name }}</option>
+                                </select> 
+                              </div>
+                              <div class="input-group mb-4">
+                                  <span class="input-group-text">Item Specific 9 Name</span>
+                                <select  class="form-control" name="pro_item_specific_9_name" [(ngModel)]="pro_item_specific_9_name">
+                                    <!-- <option value=""  disabled>Item Specific 9 Name</option> -->
+                                  <option value="{{pro_item_specific_9_name}}">{{ pro_item_specific_9_name }}</option>
+                                </select> 
+                              </div>
+                              
+                            </div>
+                            <div class="col-md-6 input-group ">
+                              <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Item Specific 1 Value</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Item Specific 1 Value"  name="pro_item_specific_1_value" required [(ngModel)]="pro_item_specific_1_value" >
+                              </div>
+                              <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 2 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 2 Value"  name="pro_item_specific_2_value" required [(ngModel)]="pro_item_specific_2_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 3 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 3 Value"  name="pro_item_specific_3_value" required [(ngModel)]="pro_item_specific_3_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 4 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 4 Value"  name="pro_item_specific_4_value" required [(ngModel)]="pro_item_specific_4_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 5 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 5 Value"  name="pro_item_specific_5_value" required [(ngModel)]="pro_item_specific_5_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 6 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 6 Value"  name="pro_item_specific_6_value" required [(ngModel)]="pro_item_specific_6_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 7 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 7 Value"  name="item_specific_7_value" required [(ngModel)]="pro_item_specific_7_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 8 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 8 Value"  name="pro_item_specific_8_value" required [(ngModel)]="pro_item_specific_8_value" >
+                                </div>
+                                <div class="input-group mb-4">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Item Specific 9 Value</span>
+                                  </div>
+                                  <input type="text" class="form-control" placeholder="Item Specific 9 Value"  name="pro_item_specific_9_value" required [(ngModel)]="pro_item_specific_9_value" >
+                                </div>
+                            </div>
+                            <div class="col-md-12 textarea mb-3">
+                                <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="pro_description" name="pro_description" ></app-ngx-editor>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <button type="button" class="btn btn-default float-right px-4">Preview Descrption in browser</button>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <!-- updateProduct(id,sku,title,image1,image2,image3,image4,image5,image6,image7,eBay_Category_Id,qty,ref_Id,item_specific_1_name,item_specific_2_name,item_specific_3_name,item_specific_4_name,item_specific_5_name,item_specific_6_name,item_specific_7_name,item_specific_8_name,item_specific_9_name,store_category_name,gmo_brand,gmo_mpn,gmo_category,item_specific_1_value,item_specific_2_value,item_specific_3_value,item_specific_4_value,item_specific_5_value,item_specific_6_value,item_specific_7_value,item_specific_8_value,item_specific_9_value,description) -->
+                                <button type="submit" class="btn float-right px-4 clr text-white " *ngIf="!saveBtn" (click)="updateProductById(pro_id,sku,proTitle,pro_image1,pro_image2,pro_image3,pro_image4,pro_image5,pro_image6,pro_image7,pro_eBay_Category_Id,pro_Ref_Id,pro_item_specific_1_name,pro_item_specific_2_name,pro_item_specific_3_name,pro_item_specific_4_name,pro_item_specific_5_name,pro_item_specific_6_name,pro_item_specific_7_name,pro_item_specific_8_name,pro_item_specific_9_name,pro_store_category_name,pro_gmo_brand,pro_gmo_mpn,pro_gmo_category,pro_item_specific_1_value,pro_item_specific_2_value,pro_item_specific_3_value,pro_item_specific_4_value,pro_item_specific_5_value,pro_item_specific_6_value,pro_item_specific_7_value,pro_item_specific_8_value,pro_item_specific_9_value,pro_description)">Update</button>
+                                <button type="submit" class="btn float-right px-4 clr text-white " *ngIf="saveBtn" (click)="addTicket(title,assigned_user,action,description,sku)">Save</button>
+                            </div>
+                            
+                          </div>
+                      </fieldset>
+                              
+                        <!-- <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Image1</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="image1"  name="pro_image1" required [(ngModel)]="pro_image1">
+                            <div class="">
+                              <img src="{{ image1 }}" alt ="" class="img"/>    
+                            </div>
+                          </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Image2</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="image2"  name="pro_image2" required [(ngModel)]="pro_image2">
+                            <div class="">
+                                <img src="{{ image2 }}" alt ="" class="img"/>    
+                              </div>    
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">eBay Category Id</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="eBay Category Id"  name="pro_eBay_Category_Id" required [(ngModel)]="pro_eBay_Category_Id" readonly disabled>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">QTY</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="QTY"  name="pro_qty" required [(ngModel)]="pro_qty">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Ref Id</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Ref Id"  name="pro_Ref_Id" required [(ngModel)]="pro_Ref_Id">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Ref Type</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Ref Type"  name="pro_Ref_Type" required [(ngModel)]="pro_Ref_Type">
+                        </div> -->
+                        <!-- <div class="row"> -->
+                          
+                        <!-- </div> -->
+                    </form>
+                  </fieldset>
+                </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- <button (click)="showModal()">Test</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="showModal">Open Modal</button> -->
+    
+</div>

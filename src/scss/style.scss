@@ -1,0 +1,106 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+
+table{
+    background: #eee9eb !important;
+}
+/*Fieldset css*/
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.100rem 0.40rem;
+    margin-bottom: 0;
+    font-size: 0.800rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #1479b5;
+    border: 1px solid #e4e7ea;
+    border-radius: 0.25rem;
+}
+th.ng2-smart-th.custom_no {
+    width: 7%;
+}
+th.ng2-smart-th.SKU,th.ng2-smart-th.Bin_price  {
+    width: 8%;
+}
+
+
+.info-box{
+    display: block;
+    min-height: 80px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+.info-box-content {
+    padding: 5px 10px;
+    margin-left: 78px;
+}
+.info-box-icon {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+    display: block;
+    float: left;
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    font-size: 36px;
+    line-height: 80px;
+    background: rgba(0,0,0,0.2);
+}
+.info-box-text {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    // white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap:break-word; 
+}
+.info-box-number {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
+.ticket-info{
+    // width: 25% !important;
+    float: left;
+}
+.clr{
+    background-color: #1479b5;
+}
+
+.app-header{
+    .navbar-brand{
+        width: 225px;
+    }
+}    

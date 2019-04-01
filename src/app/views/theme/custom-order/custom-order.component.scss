@@ -1,0 +1,46 @@
+.img-sec{
+    width: 50%;
+    float:left;
+} 
+
+
+.custom-order-text span{
+    background-color: #fff;
+    border:none;
+}
+
+.img{
+    height: 216px;
+    width: 216px;
+    border: 2px solid #000;
+}
+
+textarea.instruction{
+    width: 100%;
+}
+
+
+
+    
+    // .form-control {
+    //     background-color: buttonface;
+    // }
+
+    .instruction_area{
+        padding-top:20px;
+    }
+    textarea.form-control{
+        height:88px;
+    }
+    .table-data{
+        border: 1px solid #ccc;
+    }
+    tr th:first-child, tr td:first-child {
+        width: 80px;
+    }
+    // ng2-smart-table.table-data table {
+    //     background: #eeeafa;
+    // }
+    ng2-smart-table.table-data table{ 
+        background: #eee9eb!important;
+    }
